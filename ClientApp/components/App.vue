@@ -49,8 +49,8 @@ export default {
 // }
 </script>
 
-<style lang="sass">
-    body {
+<style>
+    /* body {
         padding: 2rem;
-    }
+    } */
 </style>

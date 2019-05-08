@@ -11,14 +11,33 @@ module.exports = (env) => {
         context: __dirname,
         resolve: { extensions: [ '.js' ] },
         entry: { 'main': './ClientApp/boot.js' },
-        
         module: {
             rules: [
-                { test: /\.vue$/, include: /ClientApp/,  loader: 'vue-loader' },
-                { test: /\.css$/, use: isDevBuild ? [ 'style-loader', 'css-loader', 'sass-loader' ] : ExtractTextPlugin.extract({ use: 'css-loader?minimize' }) },
-                { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' }
+              {
+                test: /\.vue$/,
+                include: /ClientApp/,
+                loader: "vue-loader",
+                options: {
+                    loaders: {
+                        scss: "vue-style-loader!css-loader!sass-loader",
+                        sass: "vue-style-loader!css-loader!sass-loader?indentedSyntax"
+                    }
+                }
+            },
+            {
+                test: /\.css$/,
+                use: isDevBuild ? ["style-loader", "css-loader"] : ExtractTextPlugin.extract({ use: "css-loader?minimize" })
+            },
+            { test: /\.(png|jpg|jpeg|gif|svg)$/, use: "url-loader?limit=25000" }
             ]
-        },
+          },
+        // module: {
+        //     rules: [
+        //         { test: /\.vue$/, include: /ClientApp/,  loader: 'vue-loader' },
+        //         { test: /\.css$/, use: isDevBuild ? [ 'style-loader', 'css-loader', 'sass-loader' ] : ExtractTextPlugin.extract({ use: 'css-loader?minimize' }) },
+        //         { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' }
+        //     ]
+        // },
         output: {
             path: path.join(__dirname, bundleOutputDir),
             filename: '[name].js',

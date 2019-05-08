@@ -1,7 +1,7 @@
 <template>
 	<div class="details">
-		<h1>{{product.name}}</h1>
-		<img :src="product.thumbnail" :alt="product.name">
+		<h1>{{ product.name }}</h1>
+		<img :src="product.thumbnail" :alt="product.name"  />
 		<p>{{ product.shortDescription }}</p>
 		<p>{{ product.description }}</p>
 		<p>{{ product.price }}</p>
@@ -10,7 +10,7 @@
 
 <script>
 export default {
-	name: 'product-details',
+	name: "product-details",
 	props: {
 		product: {
 			type: Object,
@@ -22,8 +22,6 @@ export default {
 
 <style>
 .details {
-	padding: 20px;
+  padding: 20px;
 }
 </style>
-
-

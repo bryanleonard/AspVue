@@ -12,7 +12,7 @@
 			</div>
 		</div> 
 
-		<product-details class="details" v-if="selectedProduct" :product="selectedProduct" />
+		<!-- <product-details class="details" v-if="selectedProduct" :product="selectedProduct" /> -->
 	</div>
 </template>
 
