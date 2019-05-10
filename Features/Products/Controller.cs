@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using AspVue.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
+using System;
 
 namespace AspVue.Features.Products
 {
@@ -14,9 +17,43 @@ namespace AspVue.Features.Products
             _db = db;
         }
 
+        // [HttpGet]
+        // public async Task<IActionResult> Find(){
+        //     var products = await _db.Products.ToListAsync();
+        //     return Ok(products);
+        // }
+
         [HttpGet]
-        public async Task<IActionResult> Find(){
-            var products = await _db.Products.ToListAsync();
+        public async Task<IActionResult> Find(
+            string brands, int? minPrice, int? maxPrice, int? minScreen, 
+            int? maxScreen, string capacity, string colors, string os, string features)
+        {
+            var Brands = string.IsNullOrEmpty(brands) ? new List<string>() : brands.Split('|').ToList();
+            var Capacity = string.IsNullOrEmpty(capacity) ? new List<string>() : capacity.Split('|').ToList();
+            var Colors = string.IsNullOrEmpty(colors) ? new List<string>() : colors.Split('|').ToList();
+            var OS = string.IsNullOrEmpty(os) ? new List<string>() : os.Split('|').ToList();
+            var Features = string.IsNullOrEmpty(features) ? new List<string>() : features.Split('|').ToList();
+
+            var products = await _db.Products
+                .Where(x => Brands.Any() == false || Brands.Contains(x.Brand.Name))
+                .Where(x => minPrice.HasValue == false || x.ProductVariants.Any(v => v.Price >= minPrice.Value))
+                .Where(x => maxPrice.HasValue == false || x.ProductVariants.Any(v => v.Price <= maxPrice.Value))
+                .Where(x => minScreen.HasValue == false || x.ScreenSize >= System.Convert.ToDecimal(minScreen.Value))
+                .Where(x => maxScreen.HasValue == false || x.ScreenSize <= Convert.ToDecimal(maxScreen.Value))
+                .Where(x => Capacity.Any() == false || x.ProductVariants.Any(v => Capacity.Contains(v.Storage.Capacity.ToString())))
+                .Where(x => Colors.Any() == false || x.ProductVariants.Any(v => Colors.Contains(v.Color.Name)))
+                .Where(x => OS.Any() == false || OS.Contains(x.OS.Name))
+                .Where(x => Features.Any() == false || Features.All(f => x.ProductFeatures.Any(pf => pf.Feature.Name == f)))
+                .Select(x => new ProductListViewModel
+                {
+                    Id = x.Id,
+                    Slug = x.Slug,
+                    Name = x.Name,
+                    ShortDescription = x.ShortDescription,
+                    Thumbnail = x.Thumbnail,
+                    Price = x.ProductVariants.OrderBy(v => v.Price).First().Price
+                })
+                .ToListAsync();
             return Ok(products);
         }
 

@@ -7,6 +7,7 @@ namespace AspVue.Data.Entities
         public int ProductId { get; set; }
         public int ColorId { get; set; }
         public int StorageId { get; set; }
+
         [Required]
         public decimal Price { get; set; }
 

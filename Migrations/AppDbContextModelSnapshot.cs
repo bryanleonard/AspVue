@@ -180,8 +180,6 @@ namespace AspVue.Migrations
 
                     b.Property<int>("OSId");
 
-                    b.Property<decimal>("Price");
-
                     b.Property<decimal>("ScreenSize");
 
                     b.Property<string>("ShortDescription")
@@ -246,8 +244,7 @@ namespace AspVue.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Capacity")
-                        .IsRequired();
+                    b.Property<int>("Capacity");
 
                     b.HasKey("Id");
 
