@@ -57,6 +57,22 @@ export default {
 	h3 {
 		cursor: pointer;
 	}
+
+	h3 {
+		color: #007bff;
+
+		&:hover {
+			color: #0069d9;
+		}
+	}
+
+	img {
+		transition: all 0.2s ease-in-out;
+
+		&:hover {
+			opacity: .65;
+		}
+	}
 }
 
 </style>

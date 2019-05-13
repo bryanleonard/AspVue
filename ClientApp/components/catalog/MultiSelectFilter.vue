@@ -38,7 +38,7 @@ export default {
 		},
 		filter(item) {
 			let query = Object.assign({}, this.$route.query);
-			let split = query[this.queryKey] ? query[this.queryKey].spliut("|") : [];
+			let split = query[this.queryKey] ? query[this.queryKey].split("|") : [];
 
 			if (split.indexOf(item) > -1) {
 				let index = split.indexOf(item);

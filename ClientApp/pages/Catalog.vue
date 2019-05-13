@@ -3,10 +3,12 @@
 	<b-row>
 		<b-col cols="3">
 			<filters v-if="filters.brands.length" :filters="filters" />
-			<!-- v-if="filters.brands.length" -->
 		</b-col>
 		<b-col cols="9">
-			<product-list :products="products" />
+			<div class="mt-4 clearfix">
+				<product-sort />
+			</div>
+			<product-list :products="sortedProducts" />
 		</b-col>
 	</b-row>
 </b-container>
@@ -16,12 +18,14 @@
 import axios from "axios";
 import Filters from "../components/catalog/Filters.vue";
 import ProductList from '../components/catalog/ProductList.vue';
+import ProductSort from "../components/catalog/ProductSort.vue";
 
 export default {
 	name: 'catalog',
 	components : {
 		Filters,
-		ProductList
+		ProductList,
+		ProductSort
 	},
 	data() {
 		return {
@@ -34,6 +38,34 @@ export default {
 				features: []
 			}
 		};
+	},
+	computed: {
+		sort() {
+			return this.$route.query.sort || 0;
+		},
+		sortedProducts() {
+			switch (this.sort) {
+				case 1:
+				return this.products.sort((a, b) => {
+					return b.price > a.price;
+				});
+				break;
+				case 2:
+				return this.products.sort((a, b) => {
+					return a.name > b.name;
+				});
+				break;
+				case 3:
+				return this.products.sort((a, b) => {
+					return b.name > a.name;
+				});
+				break;
+				default:
+				return this.products.sort((a, b) => {
+					return a.price > b.price;
+				});
+			}
+		}
 	},
 	methods: {
 		setData(products, filters) {
@@ -68,8 +100,16 @@ export default {
 			next();
 		});
 	}
-
-
-
 }
 </script>
+
+<style lang="scss" scoped>
+.flex {
+	display: flex;
+	flex-direction: row;
+
+	.search {
+		flex: 1;
+	}
+}
+</style>
