@@ -15,7 +15,7 @@
     </div> -->
 <div class="app">
     <b-navbar toggleable="md" type="dark" variant="dark">
-        <b-container>
+        <!-- <b-container> -->
             <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
             <b-navbar-brand to="/">PhoneShop</b-navbar-brand>
             <b-collapse is-nav id="nav_collapse">
@@ -23,7 +23,7 @@
                     <b-nav-item to="/products">Products</b-nav-item>
                 </b-navbar-nav>
             </b-collapse>
-        </b-container>
+        <!-- </b-container> -->
     </b-navbar>
 
     <transition name="fade" mode="out-in">
@@ -71,6 +71,22 @@ export default {
 html,
 body {
   height: 100vh;
+}
+
+h1 {
+    font-size: 1.8rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
+
+h4 {
+    font-size: 1.15rem;
 }
 
 div {

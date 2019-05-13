@@ -35,14 +35,14 @@ namespace AspVue.Features.Products
             var Features = string.IsNullOrEmpty(features) ? new List<string>() : features.Split('|').ToList();
 
             var products = await _db.Products
-                .Where(x => Brands.Any() == false || Brands.Contains(x.Brand.Name))
+                .Where(x => Brands.Any() == false || Brands.Contains(x.Brand.Name, StringComparer.CurrentCultureIgnoreCase))
                 .Where(x => minPrice.HasValue == false || x.ProductVariants.Any(v => v.Price >= minPrice.Value))
                 .Where(x => maxPrice.HasValue == false || x.ProductVariants.Any(v => v.Price <= maxPrice.Value))
                 .Where(x => minScreen.HasValue == false || x.ScreenSize >= System.Convert.ToDecimal(minScreen.Value))
                 .Where(x => maxScreen.HasValue == false || x.ScreenSize <= Convert.ToDecimal(maxScreen.Value))
-                .Where(x => Capacity.Any() == false || x.ProductVariants.Any(v => Capacity.Contains(v.Storage.Capacity.ToString())))
-                .Where(x => Colors.Any() == false || x.ProductVariants.Any(v => Colors.Contains(v.Color.Name)))
-                .Where(x => OS.Any() == false || OS.Contains(x.OS.Name))
+                .Where(x => Capacity.Any() == false || x.ProductVariants.Any(v => Capacity.Contains(v.Storage.Capacity.ToString(), StringComparer.CurrentCultureIgnoreCase)))
+                .Where(x => Colors.Any() == false || x.ProductVariants.Any(v => Colors.Contains(v.Color.Name, StringComparer.CurrentCultureIgnoreCase)))
+                .Where(x => OS.Any() == false || OS.Contains(x.OS.Name, StringComparer.CurrentCultureIgnoreCase))
                 .Where(x => Features.Any() == false || Features.All(f => x.ProductFeatures.Any(pf => pf.Feature.Name == f)))
                 .Select(x => new ProductListViewModel
                 {

@@ -5,18 +5,18 @@
 		<h1 class="mt-4 mb-4">Products</h1>
 		<b-row>
 			<b-col class="mb-4" sm="6" v-for="product in products" :key="product.id">
-				<b-media class="product">
+				<b-media class="product pr-2">
 					<img slot="aside" :src="product.thumbnail" :alt="product.name" @click="view(product)" />
-					<h2 class="mt-2" @click="view(product)">
+					<h3 class="mt-2" @click="view(product)">
 						{{ product.name }}
-					</h2>
+					</h3>
 					<p class="mt-4 mb-4">
 						{{ product.shortDescription }}
 					</p>
 					<p class="mt-4 mb-4">
-						${{ product.price }}
+						Prices from ${{ product.price }}
 					</p>
-					<b-button variant="primary">
+					<b-button variant="primary btn-sm" class="mb-3">
 						Add to cart
 					</b-button>
 				</b-media>
@@ -53,7 +53,8 @@ export default {
 	border: 3px solid #eee;
 
 	img,
-	h2 {
+	h2,
+	h3 {
 		cursor: pointer;
 	}
 }

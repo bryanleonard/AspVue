@@ -1,11 +1,13 @@
 <template>
 <div class="page">
-	<product-details :product="product" />
+	<product-details v-if="product" :product="product" />
 </div>
 </template>
 
 <script>
 import ProductDetails from "../components/products/Details.vue";
+import axios from "axios";
+
 export default {
 	name: "product",
 	components: {
@@ -22,10 +24,15 @@ export default {
 		}
 	},
 	beforeRouteEnter(to, from, next) {
-		fetch(`/api/products/${to.params.slug}`)
-			.then(response => { return response.json(); })
-			.then(product => { next(vm => vm.setData(product)); });
+		axios.get(`/api/products/${to.params.slug}`).then(response => {
+			next(vm => vm.setData(response.data));
+		});
 	}
+	// beforeRouteEnter(to, from, next) {
+	// 	fetch(`/api/products/${to.params.slug}`)
+	// 		.then(response => { return response.json(); })
+	// 		.then(product => { next(vm => vm.setData(product)); });
+	// }
 	// mounted() {
 	// 	const slug = this.$route.params.slug;
 
