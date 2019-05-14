@@ -14,7 +14,7 @@
 						{{ product.shortDescription }}
 					</p>
 					<p class="mt-4 mb-4">
-						Prices from ${{ product.price }}
+						Prices from {{ product.price | currency }}
 					</p>
 					<b-button variant="primary btn-sm" class="mb-3">
 						Add to cart

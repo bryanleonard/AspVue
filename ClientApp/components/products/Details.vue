@@ -38,10 +38,10 @@
 			</b-form-group>
 
 			<p class="mt-4 mb-4">
-				<b>Price:</b> ${{ variant.price }}
+				<b>Price:</b> {{ variant.price | currency }}
 			</p>
 
-			<b-button variant="primary btn-sm">Add to cart</b-button>
+			<b-button variant="primary btn-sm" @click="addProductToCart">Add to cart</b-button>
 		</b-col>
 	</b-row>
 
@@ -101,6 +101,9 @@ export default {
 		openGallery(index) {
 			this.index = index;
 			this.open = true;
+		},
+		addProductToCart() {
+			this.$store.dispatch("addProductToCart", this.variant);
 		}
 	}
 };

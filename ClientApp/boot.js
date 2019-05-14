@@ -9,11 +9,13 @@ Vue.use(BootstrapVue);
 
 import Catalog from "./pages/Catalog.vue";
 import Product from "./pages/Product.vue";
+import Cart from "./pages/Cart.vue";
 import { Verify } from 'crypto';
 
 const routes = [
     { path: "/products", component: Catalog },
     { path: "/products/:slug", component: Product },
+    { path: "/cart", component: Cart },
     { path: "*", redirect: "/products" }
 ];
 
