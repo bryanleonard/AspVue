@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import store from "./store";
 import BootstrapVue from "bootstrap-vue";
 import NProgress from "nprogress";
 
@@ -31,5 +32,6 @@ new Vue({
     // before NProgress
     //router: new VueRouter({ mode: 'history', routes: routes }),
     router: router,
+    store,
     render: h => h(require('./components/App.vue'))
 });
