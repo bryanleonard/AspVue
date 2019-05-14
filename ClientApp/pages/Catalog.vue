@@ -5,8 +5,9 @@
 			<filters v-if="filters.brands.length" :filters="filters" />
 		</b-col>
 		<b-col cols="9">
-			<div class="mt-4 clearfix">
-				<product-sort />
+			<div class="mt-4 flex">
+				<search-bar class="search" />
+          		<product-sort class="ml-4" />
 			</div>
 			<product-list :products="sortedProducts" />
 		</b-col>
@@ -15,28 +16,30 @@
 </template>
 
 <script>
-import axios from "axios";
-import Filters from "../components/catalog/Filters.vue";
-import ProductList from '../components/catalog/ProductList.vue';
-import ProductSort from "../components/catalog/ProductSort.vue";
+import axios 		from "axios";
+import Filters 		from "../components/catalog/Filters.vue";
+import SearchBar 	from "../components/catalog/SearchBar.vue";
+import ProductSort 	from "../components/catalog/ProductSort.vue";
+import ProductList 	from "../components/catalog/ProductList.vue";
 
 export default {
 	name: 'catalog',
-	components : {
+	components: {
 		Filters,
-		ProductList,
-		ProductSort
+		SearchBar,
+		ProductSort,
+		ProductList
 	},
 	data() {
 		return {
-			products: [],
-			filters: {
-				brands: [],
-				capacity: [],
-				colors: [],
-				os: [],
-				features: []
-			}
+		products: [],
+		filters: {
+			brands: [],
+			capacity: [],
+			colours: [],
+			os: [],
+			features: []
+		}
 		};
 	},
 	computed: {
@@ -73,26 +76,17 @@ export default {
 			this.filters = filters;
 		}
 	},
-	// mounted() {
-	// 	fetch("api/products")
-	// 		.then(response => { return response.json() })
-	// 		.then(products => { this.products = products });
-	// }
-	//old way, no longer works since we removed isomorphc-fetch
-	// fetch("api/products")
-	// 	.then(response => { return response.json(); })
-	// 	.then(products => { next(vm => vm.setData(products)); });
-	beforeRouteEnter(to, from, next){
+	beforeRouteEnter(to, from, next) {
 		axios
-			.all([
-				axios.get("/api/products", { params: to.query }),
-      			axios.get("/api/filters")
-			])
-			.then(
-				axios.spread((products, filters) => {
-        			next(vm => vm.setData(products.data, filters.data));
-      			})
-			);
+		.all([
+			axios.get("/api/products", { params: to.query }),
+			axios.get("/api/filters")
+		])
+		.then(
+			axios.spread((products, filters) => {
+				next(vm => vm.setData(products.data, filters.data));
+			})
+		);
 	},
 	beforeRouteUpdate(to, from, next) {
 		axios.get("/api/products", { params: to.query }).then(response => {
@@ -100,7 +94,7 @@ export default {
 			next();
 		});
 	}
-}
+	};
 </script>
 
 <style lang="scss" scoped>

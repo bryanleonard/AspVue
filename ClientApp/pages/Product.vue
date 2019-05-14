@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import ProductDetails from "../components/products/Details.vue";
 import axios from "axios";
+import ProductDetails from "../components/products/Details.vue";
 
 export default {
 	name: "product",
@@ -28,18 +28,6 @@ export default {
 			next(vm => vm.setData(response.data));
 		});
 	}
-	// beforeRouteEnter(to, from, next) {
-	// 	fetch(`/api/products/${to.params.slug}`)
-	// 		.then(response => { return response.json(); })
-	// 		.then(product => { next(vm => vm.setData(product)); });
-	// }
-	// mounted() {
-	// 	const slug = this.$route.params.slug;
-
-	// 	fetch(`/api/products/${slug}`)
-	// 		.then(response => { return response.json(); })
-	// 		.then(product => { this.product = product; });
-	// }
 };
 </script>
 
