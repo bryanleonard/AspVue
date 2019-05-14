@@ -11,9 +11,10 @@ Vue.use(BootstrapVue);
 import { currency } from "./filters";
 Vue.filter("currency", currency);
 
+//import page components
 import Catalog from "./pages/Catalog.vue";
 import Product from "./pages/Product.vue";
-import Cart from "./pages/Cart.vue";
+import Cart from    "./pages/Cart.vue";
 import { Verify } from 'crypto';
 
 const routes = [
@@ -24,6 +25,7 @@ const routes = [
 ];
 
 const router = new VueRouter({mode: "history", routes: routes});
+
 router.beforeEach((to, from , next) => {
     NProgress.start();
     next();

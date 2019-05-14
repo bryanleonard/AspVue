@@ -23,10 +23,10 @@
 			<b-form-input type="number" :value="item.quantity"></b-form-input>
 		</td>
 		<td>
-			${{ item.price * item.quantity | currency }}
+			{{ item.price * item.quantity | currency }}
 		</td>
 		<td>
-			<b-button variant="danger">
+			<b-button variant="danger" @click="removeProductFromCart">
 				<i class="fas fa-trash-alt"></i>
 			</b-button>
 		</td>
@@ -40,6 +40,11 @@ export default {
 		item: {
 			type: Object,
 			required: true
+		}
+	},
+	methods: {
+		removeProductFromCart() {
+			this.$store.dispatch("removeProductFromCart", this.item);
 		}
 	}
 };
