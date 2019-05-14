@@ -128,7 +128,8 @@ namespace AspVue.Data
               new Image { Url = "/assets/images/gallery3.jpg" },
               new Image { Url = "/assets/images/gallery4.jpg" },
               new Image { Url = "/assets/images/gallery5.jpg" },
-              new Image { Url = "/assets/images/gallery6.jpg" }
+              new Image { Url = "/assets/images/gallery6.jpg" },
+              new Image { Url = "/assets/images/gallery7.jpg" }
             },
             ProductFeatures = new List<ProductFeature>
             {
@@ -196,7 +197,8 @@ namespace AspVue.Data
               new Image { Url = "/assets/images/gallery3.jpg" },
               new Image { Url = "/assets/images/gallery4.jpg" },
               new Image { Url = "/assets/images/gallery5.jpg" },
-              new Image { Url = "/assets/images/gallery6.jpg" }
+              new Image { Url = "/assets/images/gallery6.jpg" },
+              new Image { Url = "/assets/images/gallery7.jpg" }
             },
             ProductFeatures = new List<ProductFeature>
             {
@@ -264,7 +266,8 @@ namespace AspVue.Data
               new Image { Url = "/assets/images/gallery3.jpg" },
               new Image { Url = "/assets/images/gallery4.jpg" },
               new Image { Url = "/assets/images/gallery5.jpg" },
-              new Image { Url = "/assets/images/gallery6.jpg" }
+              new Image { Url = "/assets/images/gallery6.jpg" },
+              new Image { Url = "/assets/images/gallery7.jpg" }
             },
             ProductFeatures = new List<ProductFeature>
             {
@@ -344,7 +347,8 @@ namespace AspVue.Data
               new Image { Url = "/assets/images/gallery3.jpg" },
               new Image { Url = "/assets/images/gallery4.jpg" },
               new Image { Url = "/assets/images/gallery5.jpg" },
-              new Image { Url = "/assets/images/gallery6.jpg" }
+              new Image { Url = "/assets/images/gallery6.jpg" },
+              new Image { Url = "/assets/images/gallery7.jpg" }
             },
             ProductFeatures = new List<ProductFeature>
             {
@@ -496,7 +500,8 @@ namespace AspVue.Data
               new Image { Url = "/assets/images/gallery3.jpg" },
               new Image { Url = "/assets/images/gallery4.jpg" },
               new Image { Url = "/assets/images/gallery5.jpg" },
-              new Image { Url = "/assets/images/gallery6.jpg" }
+              new Image { Url = "/assets/images/gallery6.jpg" },
+              new Image { Url = "/assets/images/gallery7.jpg" }
             },
             ProductFeatures = new List<ProductFeature>
             {
