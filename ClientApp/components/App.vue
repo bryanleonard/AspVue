@@ -23,11 +23,14 @@
 
 <script>
     import CartSummary from "./cart/CartSummary.vue";
-    
+
     export default {
         name: "app",
         components: {
             CartSummary
+        },
+        beforeCreate() {
+            this.$store.commit("initialize");
         }
     };
     

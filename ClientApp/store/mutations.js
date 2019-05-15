@@ -30,3 +30,11 @@ export const setProductQuantity = (state, payload) => {
   
 	state.cart.splice(index, 1, Object.assign({}, cartItem));
 };
+
+export const initialize = state => {
+	const store = localStorage.getItem("store");
+	if (store) {
+		// create a state change so that Vue will react
+		Object.assign(state, JSON.parse(store));
+	}
+}
