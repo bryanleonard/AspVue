@@ -36,7 +36,7 @@ export default {
 		filters: {
 			brands: [],
 			capacity: [],
-			colours: [],
+			colors: [],
 			os: [],
 			features: []
 		}
@@ -49,24 +49,24 @@ export default {
 		sortedProducts() {
 			switch (this.sort) {
 				case 1:
-				return this.products.sort((a, b) => {
-					return b.price > a.price;
-				});
-				break;
+					return this.products.sort((a, b) => {
+						return b.price > a.price;
+					});
+					break;
 				case 2:
-				return this.products.sort((a, b) => {
-					return a.name > b.name;
-				});
-				break;
+					return this.products.sort((a, b) => {
+						return a.name > b.name;
+					});
+					break;
 				case 3:
-				return this.products.sort((a, b) => {
-					return b.name > a.name;
-				});
-				break;
+					return this.products.sort((a, b) => {
+						return b.name > a.name;
+					});
+					break;
 				default:
-				return this.products.sort((a, b) => {
-					return a.price > b.price;
-				});
+					return this.products.sort((a, b) => {
+						return a.price > b.price;
+					});
 			}
 		}
 	},

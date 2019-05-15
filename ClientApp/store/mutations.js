@@ -8,9 +8,10 @@ export const updateProductQuantity = (state, product) => {
 	let cartItem = state.cart[index];
 	cartItem.quantity++;
 
+	console.log(state);
+  
 	state.cart.splice(index, 1, Object.assign({}, cartItem));
 };
-
 
 /*
 	This mutation is a simple case of calling the Array.splice function and passing it the 
@@ -22,4 +23,10 @@ export const removeProductFromCart = (state, index) => {
 	state.cart.splice(index, 1);
 };
 
-//https://subscription.packtpub.com/book/application_development/9781788839464/6/ch06lvl1sec51/updating-cart-items
+export const setProductQuantity = (state, payload) => {
+	const index = state.cart.indexOf(payload.product);
+	let cartItem = state.cart[index];
+	cartItem.quantity = payload.quantity;
+  
+	state.cart.splice(index, 1, Object.assign({}, cartItem));
+};
