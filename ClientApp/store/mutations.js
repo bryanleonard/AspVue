@@ -4,11 +4,13 @@ export const addProductToCart = (state, product) => {
 };
 
 export const updateProductQuantity = (state, product) => {
+
+	
 	const index = state.cart.indexOf(product);
+
+	console.log(index);
 	let cartItem = state.cart[index];
 	cartItem.quantity++;
-
-	console.log(state);
   
 	state.cart.splice(index, 1, Object.assign({}, cartItem));
 };
