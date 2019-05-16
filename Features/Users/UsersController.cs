@@ -1,10 +1,12 @@
 using System.Threading.Tasks;
 using AspVue.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace AspVue.Features.Users
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class UsersController : Controller
     {
