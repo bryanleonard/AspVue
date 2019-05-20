@@ -8,7 +8,6 @@ export const updateProductQuantity = (state, product) => {
 	
 	const index = state.cart.indexOf(product);
 
-	console.log(index);
 	let cartItem = state.cart[index];
 	cartItem.quantity++;
   
@@ -33,10 +32,52 @@ export const setProductQuantity = (state, payload) => {
 	state.cart.splice(index, 1, Object.assign({}, cartItem));
 };
 
-export const initialize = state => {
-	const store = localStorage.getItem("store");
-	if (store) {
-		// create a state change so that Vue will react
-		Object.assign(state, JSON.parse(store));
-	}
-}
+// export const initialize = state => {
+// 	const store = localStorage.getItem("store");
+// 	if (store) {
+// 		// create a state change so that Vue will react
+// 		Object.assign(state, JSON.parse(store));
+// 	}
+// };
+export const initialize = (state, payload) => {
+	Object.assign(state, payload);
+  };
+
+export const showAuthModal = state => {
+	state.showAuthModal = true;
+};
+
+export const hideAuthModal = state => {
+	state.showAuthModal = false;
+};
+
+export const loginRequest = state => {
+	state.loading = true;
+};
+
+export const loginSuccess = (state, payload) => {
+	
+	console.log('state', state);
+	state.auth = payload;
+	state.loading = false;
+};
+
+export const loginError = state => {
+	state.loading = false;
+};
+
+export const registerRequest = state => {
+	state.loading = true;
+};
+
+export const registerSuccess = state => {
+	state.loading = false;
+};
+
+export const registerError = state => {
+	state.loading = false;
+};
+
+export const logout = state => {
+	state.auth = null;
+};
