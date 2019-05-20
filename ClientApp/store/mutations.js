@@ -32,15 +32,8 @@ export const setProductQuantity = (state, payload) => {
 	state.cart.splice(index, 1, Object.assign({}, cartItem));
 };
 
-// export const initialize = state => {
-// 	const store = localStorage.getItem("store");
-// 	if (store) {
-// 		// create a state change so that Vue will react
-// 		Object.assign(state, JSON.parse(store));
-// 	}
-// };
 export const initialize = (state, payload) => {
-	Object.assign(state, payload);
+	Object.assign(state, payload); // create a state change so that Vue will react
   };
 
 export const showAuthModal = state => {
@@ -56,8 +49,6 @@ export const loginRequest = state => {
 };
 
 export const loginSuccess = (state, payload) => {
-	
-	console.log('state', state);
 	state.auth = payload;
 	state.loading = false;
 };

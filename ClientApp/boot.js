@@ -5,6 +5,7 @@ import BootstrapVue from "bootstrap-vue";
 import NProgress from "nprogress";
 import VueToastr from "@deveodk/vue-toastr";
 import "@deveodk/vue-toastr/dist/@deveodk/vue-toastr.css";
+import axios from "axios";
 
 Vue.use(VueRouter);
 Vue.use(BootstrapVue);
@@ -20,12 +21,24 @@ Vue.filter("currency", currency);
 import Catalog from "./pages/Catalog.vue";
 import Product from "./pages/Product.vue";
 import Cart from    "./pages/Cart.vue";
+import Checkout from    "./pages/Checkout.vue";
 import { Verify } from 'crypto';
+
+const initialStore = localStorage.getItem("store");
+
+if (initialStore){
+    store.commit("initialize", JSON.parse(initialStore));
+
+    if (store.getters.isAuthenticated){
+        axios.defaults.headers.common["Authorization"] = `Bearer ${store.state.auth.access_token}`;
+    }
+}
 
 const routes = [
     { path: "/products", component: Catalog },
     { path: "/products/:slug", component: Product },
     { path: "/cart", component: Cart },
+    { path: "/checkout", component: Checkout, meta: { requiresAuth: true } },
     { path: "*", redirect: "/products" }
 ];
 
@@ -33,7 +46,17 @@ const router = new VueRouter({mode: "history", routes: routes});
 
 router.beforeEach((to, from , next) => {
     NProgress.start();
-    next();
+    if (to.matched.some(route => route.meta.requiresAuth)) { //Array.some similar to LINQ Any
+        if (!store.getters.isAuthenticated) {
+            store.commit("showAuthModal");
+            next({ path: from.path, query: { redirect: to.path } });
+        }
+        else {
+            next();
+        }
+    } else {
+        next();
+    }
 });
 
 router.afterEach((to, from) => {

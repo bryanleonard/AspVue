@@ -37,7 +37,8 @@
             AuthModal
         },
         beforeCreate() {
-            this.$store.commit("initialize");
+            // moved to boot.js so that it runs in the correct order (before authoriation navigation guard)
+            // this.$store.commit("initialize");
         },
         computed: {
             showAuthModal() {
@@ -92,7 +93,7 @@ div {
 
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity 0.2s ease-in-out;
+    transition: opacity 0.05s ease-in-out;
 }
 
 .fade-enter,
