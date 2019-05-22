@@ -16,7 +16,7 @@ import LoginForm from "./LoginForm.vue";
 import RegisterForm from "./RegisterForm.vue";
 
 export default {
-	name: "autho-modal",
+	name: "auth-modal",
 	components: {
 		LoginForm,
 		RegisterForm

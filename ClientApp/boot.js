@@ -6,23 +6,27 @@ import NProgress from "nprogress";
 import VueToastr from "@deveodk/vue-toastr";
 import "@deveodk/vue-toastr/dist/@deveodk/vue-toastr.css";
 import axios from "axios";
+import VeeValidate from "vee-validate";
 
 Vue.use(VueRouter);
 Vue.use(BootstrapVue);
 Vue.use(VueToastr, {
     defaultPosition: "toast-top-center"
 });
+Vue.use(VeeValidate);
 
 // filters
-import { currency } from "./filters";
+import { currency, date } from "./filters";
 Vue.filter("currency", currency);
+Vue.filter("date", date);
 
 //import page components
 import Catalog from "./pages/Catalog.vue";
 import Product from "./pages/Product.vue";
 import Cart from    "./pages/Cart.vue";
 import Checkout from    "./pages/Checkout.vue";
-import { Verify } from 'crypto';
+import Account from    "./pages/Account.vue";
+// import { Verify } from 'crypto';
 
 const initialStore = localStorage.getItem("store");
 
@@ -38,7 +42,8 @@ const routes = [
     { path: "/products", component: Catalog },
     { path: "/products/:slug", component: Product },
     { path: "/cart", component: Cart },
-    { path: "/checkout", component: Checkout, meta: { requiresAuth: true } },
+    { path: "/checkout", component: Checkout,   meta: { requiresAuth: true } },
+    { path: "/account", component: Account,     meta: { requiresAuth: true } },
     { path: "*", redirect: "/products" }
 ];
 
@@ -59,6 +64,7 @@ router.beforeEach((to, from , next) => {
     }
 });
 
+// eslint-disable-next-line no-unused-vars
 router.afterEach((to, from) => {
     NProgress.done();
 });
@@ -69,5 +75,6 @@ new Vue({
     //router: new VueRouter({ mode: 'history', routes: routes }),
     router: router,
     store,
+    // eslint-disable-next-line no-undef
     render: h => h(require('./components/App.vue'))
 });

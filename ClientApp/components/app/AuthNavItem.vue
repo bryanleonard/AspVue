@@ -4,6 +4,10 @@
 			<i class="fas fa-user"></i>
 			<!-- <i class="fas fa-user"></i> {{ fullName }} -->
 		</template>
+		<b-dropdown-item to="/account">
+			<i class="fas fa-user"></i>
+			My Account
+		</b-dropdown-item>
 		<b-dropdown-item @click="logout">
 			<i class="fas fa-sign-out-alt"></i> Logout
 		</b-dropdown-item>
@@ -18,7 +22,6 @@ export default {
   	name: "auth-nav-item",
 	computed: {
 		isAuthenticated() {
-			console.log(this.$store.getters.isAuthenticated);
 			return this.$store.getters.isAuthenticated;
 		},
 		fullName() {

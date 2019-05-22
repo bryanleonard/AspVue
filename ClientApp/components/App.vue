@@ -74,7 +74,7 @@ h4 {
 
 div {
     &.app,
-    &.page {
+    &.pageZZZ {
         height: 100% !important;
     }
 }

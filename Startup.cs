@@ -16,6 +16,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Stripe;
 
 namespace AspVue
 {
@@ -108,6 +109,8 @@ namespace AspVue
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
             });
+
+            StripeConfiguration.SetApiKey("sk_test_***");
         }
     }
 }

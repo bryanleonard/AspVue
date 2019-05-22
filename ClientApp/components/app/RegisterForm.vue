@@ -38,7 +38,7 @@ export default {
 			email: "",
 			password: "",
 			confirmPassword: "",
-			errors: null
+			regErrors: null
 		}
 	},
 	computed: {
@@ -58,7 +58,7 @@ export default {
 
 			this.$store.dispatch("register", payload)
 				.then(response => {
-					this.errors = null;
+					this.regErrors = null;
 					this.firstName = "";
 					this.lastName = "";
 					this.email = "";
@@ -70,15 +70,15 @@ export default {
 				.catch(error => {
 					if (typeof error.data === "string" || error.data  instanceof String) 
 					{ 
-						this.errors = { error: [error.data] };
+						this.regErrors = { error: [error.data] };
 					} 
 					else {
-						this.errors = error.data;
+						this.regErrors = error.data;
 					}
 				});
 		},
 		close() {
-			this.errors = null;
+			this.regErrors = null;
 			this.$emit("close");
 		}
 	}

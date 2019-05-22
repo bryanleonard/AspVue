@@ -18,6 +18,7 @@ namespace AspVue.Data
         public DbSet<ProductFeature> ProductFeatures { get; set; }
         public DbSet<ProductVariant> ProductVariants { get; set; }
         public DbSet<Storage> Storage { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder  modelBuilder)
