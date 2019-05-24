@@ -110,7 +110,7 @@ namespace AspVue
                     defaults: new { controller = "Home", action = "Index" });
             });
 
-            StripeConfiguration.SetApiKey("sk_test_***");
+            StripeConfiguration.SetApiKey(Configuration["Stripe:PrivateKey"]);
         }
     }
 }

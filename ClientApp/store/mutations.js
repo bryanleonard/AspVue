@@ -73,7 +73,6 @@ export const logout = state => {
 	state.auth = null;
 };
 
-
 export const clearCartItems = state => {
 	state.cart = [];
 }

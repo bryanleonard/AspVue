@@ -4,7 +4,7 @@
 			<i class="fas fa-user"></i>
 			<!-- <i class="fas fa-user"></i> {{ fullName }} -->
 		</template>
-		<b-dropdown-item to="/account">
+		<b-dropdown-item to="/account" v-if="isCustomer">
 			<i class="fas fa-user"></i>
 			My Account
 		</b-dropdown-item>
@@ -26,6 +26,9 @@ export default {
 		},
 		fullName() {
 			return `${this.$store.state.auth.firstName} ${this.$store.state.auth.lastName}`;
+		},
+		isCustomer() {
+			return this.$store.getters.isInRole("Customer");
 		}
 	},
 	methods: {
@@ -34,7 +37,7 @@ export default {
 		},
 		logout() {
 			this.$store.dispatch("logout").then(() => {
-				if (this.$route.meta.requiresAuth) {
+				if (this.$route.matched.some(route => route.meta.requiresAuth)) {
 					this.$router.push("/");
 				}
 			});

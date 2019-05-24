@@ -1,27 +1,25 @@
 <template>
-	<b-container class="page pt-4">
-		<h1>My Account</h1>
-		<order-list :orders="orders" />
-	</b-container>
+	<order-list :orders="orders" />
 </template>
+
 
 <script>
 import axios from "axios";
-import OrderList from "../components/shared/OrderList.vue";
+import OrderList from "../../components/shared/OrderList.vue";
 
 export default {
-	name: "account",
-	components:{
+  name: "orders",
+	components: {
 		OrderList
 	},
 	data() {
-		return{
+		return {
 			orders: null
 		}
 	},
 	methods: {
 		setData(orders) {
-			this.orders = orders
+			this.orders = orders;
 		}
 	},
 	beforeRouteEnter(to, from, next) {
@@ -31,5 +29,5 @@ export default {
 				next(vm => vm.setData(response.data));
 			});
 	}
-}
+};
 </script>

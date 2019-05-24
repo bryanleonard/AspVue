@@ -30,11 +30,11 @@
 
 			<h5>Variants</h5>
 			<b-form-group label="Color">
-				<b-form-select :options="product.colors" v-model="color" />
+				<b-form-select :options="colors" v-model="color" />
 			</b-form-group>
 
 			<b-form-group label="Capacity">
-				<b-form-select :options="product.storage" v-model="capacity" />
+				<b-form-select :options="storage" v-model="capacity" />
 			</b-form-group>
 
 			<p class="mt-4 mb-4">
@@ -59,10 +59,12 @@
 	</transition>
 </b-container>
 
+
 </template>
 
 <script>
 import Gallery from "./Gallery.vue";
+import _ from "lodash";
 
 export default {
 	name: "product-details",
@@ -80,18 +82,28 @@ export default {
 			open: false,
 			index: 0,
 			color: null,
-			capacity: null
+			capacity: null,
+			colors: [],
+			storage: [],
+			variant: null
 		};
 	},
 	created() {
-		this.color = this.product.colors[0].value;
-		this.capacity = this.product.storage[0].value;
+		this.computeColors();
+		this.computeStorage();
+		this.computeProductVariant();
 	},
-	computed: {
-		variant() {
-			return this.product.variants.find(
-				v => v.colorId == this.color && v.storageId == this.capacity
-			);
+	watch: {
+		color: {
+			handler(value) {
+				this.computeStorage();
+				this.computeProductVariant();
+			}
+		},
+		capacity: {
+			handler(value) {
+				this.computeProductVariant();
+			}
 		}
 	},
 	methods: {
@@ -105,6 +117,38 @@ export default {
 		addProductToCart() {
 			this.$store.dispatch("addProductToCart", this.variant);
 			this.$toastr("success", "Product successfully added to cart.");
+		},
+		computeColors() {
+			this.colors = _.uniqBy(
+				this.product.variants.map(v => {
+					return {
+						value: v.colorId,
+						text: v.color
+					};
+				}),
+				"value"
+			);
+
+			this.color = this.colors[0].value;
+		},
+		computeStorage() {
+			this
+				.storage = this.product.variants.filter(v => {
+					return v.colorId == this.color
+				})
+				.map(v => {
+					return {
+						value: v.storageId,
+						text: v.capacity
+					}
+				});
+
+				this.capacity = this.storage[0].value;
+		},
+		computeProductVariant() {
+			this.variant = this.product.variants.find(
+				v => v.colorId == this.color && v.storageId == this.capacity
+			);
 		}
 	}
 };

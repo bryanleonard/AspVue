@@ -83,7 +83,7 @@
 <script>
 import axios from "axios";
 
-let stripe = Stripe('pk_test_'),
+let stripe = Stripe('pk_test_GQJLd0wCxF3ixXd3wWC9ES69001FKP7Vb1'),
 	elements = stripe.elements(),
 	card = null,
 	style = {

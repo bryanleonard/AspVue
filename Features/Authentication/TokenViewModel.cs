@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace AspVue.Features.Authentication
@@ -12,5 +13,6 @@ namespace AspVue.Features.Authentication
         public DateTime AccessTokenExpiration { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public IEnumerable<string> Roles { get; set; }
     }
 }
